@@ -1,0 +1,51 @@
+[
+ {
+  "capability": "code",
+  "source": "TanStack Start 3D exhibition site",
+  "outcome": "migrate",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "schema",
+  "source": "none detected",
+  "outcome": "absent",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "records",
+  "source": "none detected",
+  "outcome": "absent",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "auth",
+  "source": "none detected",
+  "outcome": "absent",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "uploaded_files",
+  "source": "earth.glb asset pointer",
+  "outcome": "migrate",
+  "status": "pending",
+  "next_action": "user to re-upload earth.glb; old asset pointer 404s in this project"
+ },
+ {
+  "capability": "external_providers",
+  "source": "none",
+  "outcome": "absent",
+  "status": "verified",
+  "next_action": "none"
+ },
+ {
+  "capability": "public_endpoints_webhooks_schedules_secrets",
+  "source": "none",
+  "outcome": "absent",
+  "status": "verified",
+  "next_action": "none"
+ }
+]
