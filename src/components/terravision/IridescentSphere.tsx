@@ -71,11 +71,13 @@ export function IridescentSphere(_props: { lite: boolean }) {
     const mobile = window.innerWidth <= 768;
     const rise = sceneState.finalRise;
     const final = rise > 0 && p > 0.82;
-    root.current.visible = mobile ? sceneState.activeSection === "top" || sceneState.activeSection === "explore" : p < 0.23 || final;
+    // On the first screen the globe scrolls away with the page instead of staying pinned.
+    const heroLift = final || mobile ? 0 : sceneState.heroScroll * 2 * Math.tan((38 / 2) * Math.PI / 180) * 8.4;
+    root.current.visible = mobile ? sceneState.activeSection === "top" || sceneState.activeSection === "explore" : (sceneState.heroScroll < 1.3 && p < 0.23) || final;
     appear.current = Math.min(1, appear.current + delta * (reduced ? 10 : 0.6));
     const a = 1 - Math.pow(1 - appear.current, 3);
     hover.current += ((sceneState.focus ? 1 : 0) - hover.current) * (1 - Math.exp(-4 * delta));
-    const depth = final ? 0 : Math.min(1, p / 0.2);
+    const depth = 0;
     const base = mobile ? 1.15 : Math.min(1, window.innerWidth / window.innerHeight / 1.5) * 1.3;
     const ease = rise * rise * (3 - 2 * rise);
     const engulf = final && !mobile ? 0.6 + ease * 0.9 : 1;
@@ -83,7 +85,7 @@ export function IridescentSphere(_props: { lite: boolean }) {
     root.current.position.z = -depth * 2.5;
     // Track the closing title on screen so the globe rises with it and wraps around it.
     const halfH = Math.tan((38 / 2) * Math.PI / 180) * 8.4;
-    root.current.position.y = (final && !mobile ? Math.min(0.3, Math.max(-6, sceneState.finalY * halfH)) : 0) + (reduced ? 0 : Math.sin(t * 0.9) * 0.08);
+    root.current.position.y = (final && !mobile ? Math.min(0.3, Math.max(-6, sceneState.finalY * halfH)) : 0) + heroLift + (reduced ? 0 : Math.sin(t * 0.9) * 0.08);
     const k = 1 - Math.exp(-3 * delta);
     root.current.position.x += ((reduced ? 0 : sceneState.pointerX * 0.18) - root.current.position.x) * k;
     shell.current.rotation.y = reduced ? 0.4 : t * 0.12 + p * 3;

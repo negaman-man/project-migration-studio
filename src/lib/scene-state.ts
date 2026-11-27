@@ -3,6 +3,10 @@ import type { ProjectId } from "@/config/projects";
 /** Per-frame scene inputs, mutated outside React so the 3D scene never re-renders on scroll. */
 export const sceneState = {
   scroll: 0,
+  /** Raw scroll progress from the page; `scroll` eases toward it each frame. */
+  scrollTarget: 0,
+  /** Page scroll in viewport heights, used to carry the opening globe away with the first screen. */
+  heroScroll: 0,
   pointerX: 0,
   pointerY: 0,
   focus: null as ProjectId | null,

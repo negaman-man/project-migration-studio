@@ -11,9 +11,12 @@ import { Planet } from "./Planet";
 function CameraRig() {
   const { camera, scene, gl } = useThree();
   useFrame((_, delta) => {
+    const d = Math.min(delta, 0.1);
+    sceneState.scroll += (sceneState.scrollTarget - sceneState.scroll) * (1 - Math.exp(-5 * d));
+    if (Math.abs(sceneState.scrollTarget - sceneState.scroll) < 1e-4) sceneState.scroll = sceneState.scrollTarget;
     const p = sceneState.scroll;
     const target = cameraTarget(sceneState.pointerX, sceneState.pointerY, p, sceneState.reducedMotion);
-    const k = 1 - Math.exp(-6 * Math.min(delta, 0.15));
+    const k = 1 - Math.exp(-4 * Math.min(delta, 0.1));
     camera.position.x += (target.x - camera.position.x) * k;
     camera.position.y += (target.y - camera.position.y) * k;
     camera.position.z += (target.z - camera.position.z) * k;
@@ -65,7 +68,8 @@ export default function SceneCanvas({ lite }: { lite: boolean }) {
         next = sectionProgress(top,node.offsetHeight,window.innerHeight,from,to);
         sceneState.activeSection = node.id;
       }
-      sceneState.scroll = next;
+      sceneState.scrollTarget = next;
+      sceneState.heroScroll = window.scrollY / window.innerHeight;
       const fin = document.querySelector<HTMLElement>(".tv-final-title");
       if (fin) {
         const r = fin.getBoundingClientRect(), vh = window.innerHeight;
@@ -99,6 +103,7 @@ export default function SceneCanvas({ lite }: { lite: boolean }) {
       sceneState.pointerY = 1 - touch.clientY / window.innerHeight * 2;
     };
     update();
+    sceneState.scroll = sceneState.scrollTarget;
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
     window.addEventListener("pointermove", onMove, { passive: true });
