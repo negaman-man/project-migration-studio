@@ -29,10 +29,10 @@
  },
  {
   "capability": "uploaded_files",
-  "source": "earth.glb asset pointer",
+  "source": "earth.glb model, re-uploaded by user",
   "outcome": "migrate",
-  "status": "pending",
-  "next_action": "user to re-upload earth.glb; old asset pointer 404s in this project"
+  "status": "verified",
+  "next_action": "none"
  },
  {
   "capability": "external_providers",
