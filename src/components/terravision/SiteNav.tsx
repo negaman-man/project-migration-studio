@@ -19,10 +19,12 @@ export function scrollToSection(id: string) {
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? window.scrollY / max : 0);
+      setScrolled(window.scrollY > 24);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -38,7 +40,7 @@ export function SiteNav() {
 
   return (
     <>
-      <header className="tv-nav-wrap">
+      <header className={`tv-nav-wrap${scrolled ? " tv-nav-scrolled" : ""}`}>
         <nav className="tv-nav" aria-label="Main">
           <button className="tv-mark" onClick={() => go("top")}>TerraVision<span>—OS</span></button>
           <div className="tv-nav-right">

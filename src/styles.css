@@ -592,3 +592,12 @@
       transparent 82%);
   }
 }
+
+/* Nav buttons sit in a pill that gains a thin border and frosted glass once the page scrolls. */
+.tv-nav-wrap { transition: mix-blend-mode .3s; }
+.tv-nav-right { align-items: center; padding: 4px; border: 1px solid transparent; border-radius: 999px; background: transparent; transition: background .4s ease, border-color .4s ease, backdrop-filter .4s ease, box-shadow .4s ease; }
+.tv-nav-wrap.tv-nav-scrolled { mix-blend-mode: normal; }
+.tv-nav-wrap.tv-nav-scrolled .tv-nav-right { background: oklch(0.17 0.004 80 / 0.5); border-color: oklch(0.96 0.01 85 / 0.18); backdrop-filter: blur(14px); box-shadow: 0 8px 30px oklch(0 0 0 / 0.25); }
+.tv-nav-wrap.tv-nav-scrolled .tv-nav-mini { color: var(--ivory); }
+.tv-nav-wrap.tv-nav-scrolled .tv-nav-mini:last-child { border-color: oklch(0.96 0.01 85 / 0.3); }
+.tv-nav-wrap.tv-nav-scrolled .tv-mark { color: var(--ivory); }
