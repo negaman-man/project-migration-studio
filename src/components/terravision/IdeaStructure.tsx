@@ -26,14 +26,14 @@ export function IdeaStructure() {
     const enter = ease((p - 0.2) / 0.08);
     const exit = ease((p - 0.42) / 0.07);
     const mobile = window.innerWidth <= 768;
-    const vis = mobile ? (sceneState.activeSection === 'imagined' ? 1 : 0) : enter * (1 - exit);
+    const vis = mobile ? (sceneState.activeSection === 'imagined' ? 1 : 0) : (Math.abs(sceneState.anchorY.imagined) < 7 ? 1 : 0) * (0.6 + 0.4 * enter * (1 - exit));
     const expand = 0.65 + ease((p - 0.25) / 0.08) * 0.35;
     const explode = 0.35 + ease((p - 0.31) / 0.08) * 0.65;
     if (!root.current) return;
     root.current.visible = vis > 0.01;
     root.current.scale.setScalar(Math.max(0.001, vis * (mobile ? 1.9 : 1.35)));
     root.current.position.x = window.innerWidth > 768 ? 1.75 : 0;
-    root.current.position.y = 0;
+    root.current.position.y = mobile ? 0 : sceneState.anchorY.imagined;
     if (!sceneState.reducedMotion) root.current.rotation.y += delta * 0.28;
     root.current.rotation.x = 0.35;
     if (spark.current) {

@@ -7,6 +7,8 @@ export const sceneState = {
   scrollTarget: 0,
   /** Page scroll in viewport heights, used to carry the opening globe away with the first screen. */
   heroScroll: 0,
+  /** World-space Y of each story section's content, so its model moves with the page. */
+  anchorY: { imagined: 99, earth: 99 } as Record<"imagined" | "earth", number>,
   pointerX: 0,
   pointerY: 0,
   focus: null as ProjectId | null,

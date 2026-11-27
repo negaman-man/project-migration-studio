@@ -26,15 +26,15 @@ export function Exhibition() {
           .from(".tv-hero-frame", { opacity: 0, scale: 0.99, duration: 0.75 }, "-=0.35")
           .fromTo(".tv-orbit", { strokeDashoffset: 1200, opacity: 0 }, { strokeDashoffset: 0, opacity: 0.5, duration: 1.35, stagger: 0.08 }, "-=0.3")
           .from(".tv-line", { yPercent: 110, duration: 0.85, stagger: 0.08 }, "-=0.65")
-          .from(".tv-hero-subtitle, .tv-hero-index, .tv-hero-note, .tv-scroll-cue", { opacity: 0, y: 8, duration: 0.55, stagger: 0.05 }, "-=0.3");
-        gsap.to(".tv-orbits", { rotate: 24, scale: 1.18, ease: "none", scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 1.2 } });
-        gsap.to(".tv-hero-title", { yPercent: -18, ease: "none", scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 1.2 } });
+          .from(".tv-hero-subtitle, .tv-hero-index, .tv-hero-note, .tv-scroll-cue", { opacity: 0, y: 8, duration: 1.1, stagger: 0.12 }, "-=0.3");
+        gsap.to(".tv-orbits", { rotate: 24, scale: 1.18, ease: "none", scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 2 } });
+        gsap.to(".tv-hero-title", { yPercent: -18, ease: "none", scrollTrigger: { trigger: "#top", start: "top top", end: "bottom top", scrub: 2 } });
         gsap.utils.toArray<HTMLElement>(".tv-story-title:not(.tv-final-title)").forEach((el) => {
-          gsap.from(el, { y: 38, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none reverse" } });
+          gsap.from(el, { y: 60, opacity: 0, duration: 2.4, ease: "power2.out", scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none reverse" } });
         });
-        gsap.fromTo(".tv-final .tv-section-label, .tv-final-title", { y: 160, opacity: 0 }, { y: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: "#explore", start: "top bottom", end: "top 25%", scrub: 1 } });
-        gsap.to(".tv-connection-thread", { scaleX: 1, ease: "none", scrollTrigger: { trigger: ".tv-connection-intro", start: "top 85%", end: "center 45%", scrub: 1 } });
-        gsap.to(".tv-vision-word", { opacity: 1, stagger: 0.1, ease: "none", scrollTrigger: { trigger: "#vision", start: "top 70%", end: "center center", scrub: 1 } });
+        gsap.fromTo(".tv-final .tv-section-label, .tv-final-title", { y: 160, opacity: 0 }, { y: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: "#explore", start: "top bottom", end: "top 25%", scrub: 2 } });
+        gsap.to(".tv-connection-thread", { scaleX: 1, ease: "none", scrollTrigger: { trigger: ".tv-connection-intro", start: "top 85%", end: "center 45%", scrub: 2 } });
+        gsap.to(".tv-vision-word", { opacity: 1, stagger: 0.1, ease: "none", scrollTrigger: { trigger: "#vision", start: "top 70%", end: "center center", scrub: 2 } });
       });
       return () => mm.revert();
     }, root);

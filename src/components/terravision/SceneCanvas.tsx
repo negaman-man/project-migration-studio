@@ -12,11 +12,11 @@ function CameraRig() {
   const { camera, scene, gl } = useThree();
   useFrame((_, delta) => {
     const d = Math.min(delta, 0.1);
-    sceneState.scroll += (sceneState.scrollTarget - sceneState.scroll) * (1 - Math.exp(-5 * d));
+    sceneState.scroll += (sceneState.scrollTarget - sceneState.scroll) * (1 - Math.exp(-3 * d));
     if (Math.abs(sceneState.scrollTarget - sceneState.scroll) < 1e-4) sceneState.scroll = sceneState.scrollTarget;
     const p = sceneState.scroll;
     const target = cameraTarget(sceneState.pointerX, sceneState.pointerY, p, sceneState.reducedMotion);
-    const k = 1 - Math.exp(-4 * Math.min(delta, 0.1));
+    const k = 1 - Math.exp(-2.5 * Math.min(delta, 0.1));
     camera.position.x += (target.x - camera.position.x) * k;
     camera.position.y += (target.y - camera.position.y) * k;
     camera.position.z += (target.z - camera.position.z) * k;
@@ -70,6 +70,13 @@ export default function SceneCanvas({ lite }: { lite: boolean }) {
       }
       sceneState.scrollTarget = next;
       sceneState.heroScroll = window.scrollY / window.innerHeight;
+      const halfH = Math.tan((38 / 2) * Math.PI / 180) * 8.4;
+      for (const id of ["imagined", "earth"] as const) {
+        const inner = document.querySelector<HTMLElement>(`#${id} .tv-story-inner`);
+        if (!inner) continue;
+        const r = inner.getBoundingClientRect();
+        sceneState.anchorY[id] = (1 - ((r.top + r.height / 2) / window.innerHeight) * 2) * halfH;
+      }
       const fin = document.querySelector<HTMLElement>(".tv-final-title");
       if (fin) {
         const r = fin.getBoundingClientRect(), vh = window.innerHeight;
